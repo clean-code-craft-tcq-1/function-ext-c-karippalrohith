@@ -17,17 +17,23 @@
  /*------ standard includes -------*/
 #include <stdio.h>
 
-#define BMS_ATTRIBUTE_TEMPERATURE_MIN_VALUE            	0u
-#define BMS_ATTRIBUTE_TEMPERATURE_MAX_VALUE            	45u
+#define BMS_ATTRIBUTE_TEMPERATURE_MIN_VALUE            				0u
+#define BMS_ATTRIBUTE_TEMPERATURE_LOWER_THRESHOLD_WARN_VALUE        2.25
+#define BMS_ATTRIBUTE_TEMPERATURE_UPPER_THRESHOLD_WARN_VALUE        42.75
+#define BMS_ATTRIBUTE_TEMPERATURE_MAX_VALUE            				45u
 
-#define BMS_ATTRIBUTE_SOC_MIN_VALUE            			20u
-#define BMS_ATTRIBUTE_SOC_MAX_VALUE            			80u
+#define BMS_ATTRIBUTE_SOC_MIN_VALUE            						20u
+#define BMS_ATTRIBUTE_SOC_LOWER_THRESHOLD_WARN_VALUE       			24u
+#define BMS_ATTRIBUTE_SOC_UPPER_THRESHOLD_WARN_VALUE        		42.75
+#define BMS_ATTRIBUTE_SOC_MAX_VALUE            						84u
 
-#define BMS_ATTRIBUTE_CHARGE_RATE_MIN_VALUE            	0u
-#define BMS_ATTRIBUTE_CHARGE_RATE_MAX_VALUE            	0.8
+#define BMS_ATTRIBUTE_CHARGE_RATE_MIN_VALUE            				0u
+#define BMS_ATTRIBUTE_CHARGE_RATE_LOWER_THRESHOLD_WARN_VALUE  		0.04
+#define BMS_ATTRIBUTE_CHARGE_RATE_UPPER_THRESHOLD_WARN_VALUE    	0.76
+#define BMS_ATTRIBUTE_CHARGE_RATE_MAX_VALUE            				0.80
 
-typedef enum {	false, 
-				true
+typedef enum {	FALSE, 
+				TRUE
 }bool;
 
 typedef struct {
@@ -38,8 +44,9 @@ typedef struct {
 } BMS_parameters_s;
 
 void BMS_setBMSStatus(bool bms_Status);
-void BMS_printParameterStatus_As_OutOfRange(char param[]);
+void BMS_printParameterStatus_As_OutOfRange(char attribute[],char attribute_Status[]);
 bool BMS_checkAttribute_OutOfRange(float bms_attribute, float attribute_Min_Value, float attribute_Max_Value, char param[]);
+void BMS_checkAttribute_Threshold_And_Trigger_Warning(float bms_attribute, float attribute_Warn_Lower_Threshold, float attribute_Warn_Upper_Threshold, char param[]);
 int BMS_batteryIsOk(float temperature, float soc, float chargeRate);
 
 #endif /*BMS_MAIN_H_*/
