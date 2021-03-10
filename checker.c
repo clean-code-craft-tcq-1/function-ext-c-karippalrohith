@@ -60,7 +60,7 @@ bool BMS_checkAttribute_OutOfRange(float bms_attribute, float attribute_Min_Valu
 	bool retAtributeStatus = FALSE;
 	if(bms_attribute < attribute_Min_Value || bms_attribute > attribute_Max_Value) 
 	{
-		BMS_printParameterStatus_As_OutOfRange(param,"out of range!");
+		BMS_printParameterStatus(param,"out of range!");
 		retAtributeStatus = TRUE;
 		BMS_setBMSStatus(TRUE);									
 	}	
@@ -69,7 +69,7 @@ bool BMS_checkAttribute_OutOfRange(float bms_attribute, float attribute_Min_Valu
 }
 
 /*---------------------------------------------------------------------------*/
-/*     FUNCTION: BMS_printParameterStatus_As_OutOfRange
+/*     FUNCTION: BMS_printParameterStatus
  */
 /*!    \brief   Function to print the parameter out of range
  *
@@ -78,7 +78,7 @@ bool BMS_checkAttribute_OutOfRange(float bms_attribute, float attribute_Min_Valu
  *     \returns  	void
  *
  *//*------------------------------------------------------------------------*/
-void BMS_printParameterStatus_As_OutOfRange(char attribute[],char attribute_Status[])
+void BMS_printParameterStatus(char attribute[],char attribute_Status[])
 {
 	printf("%s %s\n",attribute,attribute_Status);
 }
@@ -103,13 +103,13 @@ void BMS_checkAttribute_Threshold_And_Trigger_Warning(float bms_attribute, float
 	if(bms_attribute < attribute_Warn_Lower_Threshold) 
 	{
 		//Trigger warning for Lower Threshold
-		BMS_printParameterStatus_As_OutOfRange(param,"reaching Lower Threshold");
+		BMS_printParameterStatus(param,"reaching Lower Threshold");
 	}
 	
 	if(bms_attribute > attribute_Warn_Upper_Threshold) 
 	{
 		//Trigger warning for Higher Threshold
-		BMS_printParameterStatus_As_OutOfRange(param,"reaching Higher Threshold");
+		BMS_printParameterStatus(param,"reaching Higher Threshold");
 	}
 }
 
