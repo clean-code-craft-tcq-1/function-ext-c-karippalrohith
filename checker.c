@@ -33,10 +33,10 @@
  =======                VARIABLES & MESSAGES & RESSOURCEN                =======
  ==============================================================================*/
 static BMS_parameters_s BMS_parameters_attributes = {
-		false,
-		false,
-		false,
-		false
+		FALSE,
+		FALSE,
+		FALSE,
+		FALSE
 };
 /*=============================================================================
  =======                              METHODS                            =======
@@ -57,12 +57,12 @@ static BMS_parameters_s BMS_parameters_attributes = {
  *//*------------------------------------------------------------------------*/
 bool BMS_checkAttribute_OutOfRange(float bms_attribute, float attribute_Min_Value, float attribute_Max_Value, char param[])
 {
-	bool retAtributeStatus = false;
+	bool retAtributeStatus = FALSE;
 	if(bms_attribute < attribute_Min_Value || bms_attribute > attribute_Max_Value) 
 	{
-		BMS_printParameterStatus_As_OutOfRange(param);
-		retAtributeStatus = true;
-		BMS_setBMSStatus(true);									
+		BMS_printParameterStatus_As_OutOfRange(param,"out of range!");
+		retAtributeStatus = TRUE;
+		BMS_setBMSStatus(TRUE);									
 	}	
 	
 	return retAtributeStatus;
@@ -78,9 +78,9 @@ bool BMS_checkAttribute_OutOfRange(float bms_attribute, float attribute_Min_Valu
  *     \returns  	void
  *
  *//*------------------------------------------------------------------------*/
-void BMS_printParameterStatus_As_OutOfRange(char param[])
+void BMS_printParameterStatus_As_OutOfRange(char attribute[],char attribute_Status[]);
 {
-	printf("%s out of range!\n",param);
+	printf("%s %s\n",attribute,attribute_Status);
 }
 
 /*---------------------------------------------------------------------------*/
@@ -96,6 +96,21 @@ void BMS_printParameterStatus_As_OutOfRange(char param[])
 void BMS_setBMSStatus(bool bms_Status)
 {
 	BMS_parameters_attributes.bms_Status_b = bms_Status;			/*If any parameter out of range, set bms_Status_b as TRUE*/
+}
+
+void BMS_checkAttribute_Threshold_And_Trigger_Warning(float bms_attribute, float attribute_Warn_Lower_Threshold, float attribute_Warn_Upper_Threshold, char param[])
+{
+	if(bms_attribute < attribute_Warn_Lower_Threshold) 
+	{
+		//Trigger warning for Lower Threshold
+		BMS_printParameterStatus_As_OutOfRange(param,"reaching Lower Threshold");
+	}
+	
+	if(bms_attribute > attribute_Warn_Upper_Threshold) 
+	{
+		//Trigger warning for Higher Threshold
+		BMS_printParameterStatus_As_OutOfRange(param,"reaching Higher Threshold");
+	}
 }
 
 /*---------------------------------------------------------------------------*/
@@ -116,7 +131,11 @@ int BMS_batteryIsOk(float temperature, float soc, float chargeRate) {
 	BMS_parameters_attributes.soc_Status_b = BMS_checkAttribute_OutOfRange(soc,BMS_ATTRIBUTE_SOC_MIN_VALUE,BMS_ATTRIBUTE_SOC_MAX_VALUE,"State of Charge");
 	BMS_parameters_attributes.chargeRate_Status_b = BMS_checkAttribute_OutOfRange(chargeRate,BMS_ATTRIBUTE_CHARGE_RATE_MIN_VALUE,BMS_ATTRIBUTE_CHARGE_RATE_MAX_VALUE,"Charge Rate");
 	
-	if( true == BMS_parameters_attributes.bms_Status_b) 
+	BMS_checkAttribute_Threshold_And_Trigger_Warning(temperature,BMS_ATTRIBUTE_TEMPERATURE_LOWER_THRESHOLD_WARN_VALUE,BMS_ATTRIBUTE_TEMPERATURE_UPPER_THRESHOLD_WARN_VALUE,"Temperature");
+	BMS_checkAttribute_Threshold_And_Trigger_Warning(soc,BMS_ATTRIBUTE_SOC_LOWER_THRESHOLD_WARN_VALUE,BMS_ATTRIBUTE_SOC_UPPER_THRESHOLD_WARN_VALUE,"State of Charge");
+	BMS_checkAttribute_Threshold_And_Trigger_Warning(chargeRate,BMS_ATTRIBUTE_CHARGE_RATE_LOWER_THRESHOLD_WARN_VALUE,BMS_ATTRIBUTE_CHARGE_RATE_UPPER_THRESHOLD_WARN_VALUE,"Charge Rate");
+	
+	if( TRUE == BMS_parameters_attributes.bms_Status_b) 
 	{
 		return 0;
 	}
