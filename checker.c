@@ -137,6 +137,7 @@ int BMS_batteryIsOk(float temperature, float soc, float chargeRate) {
 	
 	if( TRUE == BMS_parameters_attributes.bms_Status_b) 
 	{
+		BMS_parameters_attributes.bms_Status_b = FALSE;
 		return 0;
 	}
 	else
