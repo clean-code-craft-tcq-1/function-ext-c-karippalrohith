@@ -51,12 +51,12 @@ typedef struct {
 } BMS_parameters_s;
 
 typedef struct {
-	char print_Param_Temp[30];
-	char print_Param_SoC[30];
-	char print_Param_ChargeRate[30];
-	char print_Param_Out_Of_Range[30];
-	char print_Param_Lower_Threshold[30];
-	char print_Param_Upper_Threshold[30];
+	char print_Param_Temp[40];
+	char print_Param_SoC[40];
+	char print_Param_ChargeRate[40];
+	char print_Param_Out_Of_Range[40];
+	char print_Param_Lower_Threshold[40];
+	char print_Param_Upper_Threshold[40];
 }print_Params_s;
 
 void BMS_setBMSStatus(bool bms_Status);
