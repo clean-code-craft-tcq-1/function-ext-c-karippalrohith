@@ -80,7 +80,7 @@ bool BMS_checkAttribute_OutOfRange(float bms_attribute, float attribute_Min_Valu
 {
 	bool retAtributeStatus = FALSE;
 		
-	if(bms_attribute < attribute_Min_Value || bms_attribute > attribute_Max_Value) 
+	if(bms_attribute <= attribute_Min_Value || bms_attribute > attribute_Max_Value) 
 	{
 		BMS_printParameterStatus(print_Params,printValues.print_Param_Out_Of_Range);
 		retAtributeStatus = TRUE;
@@ -188,16 +188,16 @@ int main() {
   assert(!BMS_batteryIsOk(100, 70, 0.7,LANGUAGE_ENGLISH));		/*Temp out of range*/
   assert(!BMS_batteryIsOk(25, 100, 0.7,LANGUAGE_ENGLISH));		/*SOC out of range*/
   assert(!BMS_batteryIsOk(25, 70, 1.5,LANGUAGE_ENGLISH));		/*Charge rate out of range*/
-  assert(BMS_batteryIsOk(0, 70, 0.7,LANGUAGE_ENGLISH));			/*Temp out of minimum range*/
+  assert(!BMS_batteryIsOk(0, 70, 0.7,LANGUAGE_ENGLISH));			/*Temp out of minimum range*/
   assert(!BMS_batteryIsOk(25, 10, 0.7,LANGUAGE_ENGLISH));		/*SOC out of minimum range*/
-  assert(BMS_batteryIsOk(25, 70, 0,LANGUAGE_ENGLISH));			/*Charge rate out of minimum range*/
+  assert(!BMS_batteryIsOk(25, 70, 0,LANGUAGE_ENGLISH));			/*Charge rate out of minimum range*/
   
   assert(BMS_batteryIsOk(25, 70, 0.7,LANGUAGE_GERMAN));		/*All values in range*/
   assert(!BMS_batteryIsOk(50, 85, 0,LANGUAGE_GERMAN));			/*All values out of range*/
   assert(!BMS_batteryIsOk(100, 70, 0.7,LANGUAGE_GERMAN));		/*Temp out of range*/
   assert(!BMS_batteryIsOk(25, 100, 0.7,LANGUAGE_GERMAN));		/*SOC out of range*/
   assert(!BMS_batteryIsOk(25, 70, 1.5,LANGUAGE_GERMAN));		/*Charge rate out of range*/
-  assert(BMS_batteryIsOk(0, 70, 0.7,LANGUAGE_GERMAN));			/*Temp out of minimum range*/
+  assert(!BMS_batteryIsOk(0, 70, 0.7,LANGUAGE_GERMAN));			/*Temp out of minimum range*/
   assert(!BMS_batteryIsOk(25, 10, 0.7,LANGUAGE_GERMAN));		/*SOC out of minimum range*/
-  assert(BMS_batteryIsOk(25, 70, 0,LANGUAGE_GERMAN));			/*Charge rate out of minimum range*/
+  assert(!BMS_batteryIsOk(25, 70, 0,LANGUAGE_GERMAN));			/*Charge rate out of minimum range*/
 }
