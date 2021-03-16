@@ -82,7 +82,7 @@ bool BMS_checkAttribute_OutOfRange(float bms_attribute, float attribute_Min_Valu
 		
 	if(bms_attribute < attribute_Min_Value || bms_attribute > attribute_Max_Value) 
 	{
-		BMS_printParameterStatus(print_Params,printValues.print_Param_Out_Of_Range[]);
+		BMS_printParameterStatus(print_Params,printValues.print_Param_Out_Of_Range);
 		retAtributeStatus = TRUE;
 		BMS_setBMSStatus(TRUE);									
 	}	
