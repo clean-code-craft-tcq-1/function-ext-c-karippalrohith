@@ -60,7 +60,7 @@ static print_Params_s print_Params_German = {
 };
 
 static print_Params_s printValues;
-static char printAllAttributes_In_Risk[60] = "No Attribute ";
+static char printAllAttributes_In_Risk[60] = " ";
 static int testCase;
 /*=============================================================================
  =======                              METHODS                            =======
