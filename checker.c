@@ -60,7 +60,9 @@ static print_Params_s print_Params_German = {
 };
 
 static print_Params_s printValues;
-static char printAllAttributes_In_Risk[60] = " ";
+printAllAttributes_In_Upper_Thresholdstatic char printAllAttributes_Out_Of_Range[60] = " ";
+static char printAllAttributes_In_Lower_Threshold[60] = " ";
+static char printAllAttributes_In_Upper_Threshold[60] = " ";
 static int testCase;
 /*=============================================================================
  =======                              METHODS                            =======
@@ -86,8 +88,8 @@ bool BMS_checkAttribute_OutOfRange(float bms_attribute, float attribute_Min_Valu
 	if(bms_attribute <= attribute_Min_Value || bms_attribute > attribute_Max_Value) 
 	{
 		//BMS_printParameterStatus(print_Params,printValues.print_Param_Out_Of_Range);
-		strcat(printAllAttributes_In_Risk,print_Params);
-		strcat(printAllAttributes_In_Risk,", ");
+		strcat(printAllAttributes_Out_Of_Range,print_Params);
+		strcat(printAllAttributes_Out_Of_Range,", ");
 		retAtributeStatus = TRUE;
 		BMS_setBMSStatus(TRUE);									
 	}	
@@ -130,13 +132,17 @@ void BMS_checkAttribute_Threshold_And_Trigger_Warning(float bms_attribute, float
 	if(bms_attribute < attribute_Warn_Lower_Threshold) 
 	{
 		//Trigger warning for Lower Threshold
-		BMS_printParameterStatus(print_Params,printValues.print_Param_Lower_Threshold);
+		//BMS_printParameterStatus(print_Params,printValues.print_Param_Lower_Threshold);
+		strcat(printAllAttributes_In_Lower_Threshold,print_Params);
+		strcat(printAllAttributes_In_Lower_Threshold,", ");
 	}
 	
 	if(bms_attribute > attribute_Warn_Upper_Threshold) 
 	{
 		//Trigger warning for Higher Threshold
-		BMS_printParameterStatus(print_Params,printValues.print_Param_Upper_Threshold);
+		//BMS_printParameterStatus(print_Params,printValues.print_Param_Upper_Threshold);
+		strcat(printAllAttributes_In_Upper_Threshold,print_Params);
+		strcat(printAllAttributes_In_Upper_Threshold,", ");
 	}
 }
 
@@ -164,15 +170,18 @@ int BMS_batteryIsOk(float temperature, float soc, float chargeRate,language_t la
 	BMS_parameters_attributes.soc_Status_b = BMS_checkAttribute_OutOfRange(soc,BMS_ATTRIBUTE_SOC_MIN_VALUE,BMS_ATTRIBUTE_SOC_MAX_VALUE,printValues.print_Param_SoC);
 	BMS_parameters_attributes.chargeRate_Status_b = BMS_checkAttribute_OutOfRange(chargeRate,BMS_ATTRIBUTE_CHARGE_RATE_MIN_VALUE,BMS_ATTRIBUTE_CHARGE_RATE_MAX_VALUE,printValues.print_Param_ChargeRate);
 	
-	BMS_printParameterStatus(printAllAttributes_In_Risk,printValues.print_Param_Out_Of_Range);
+	BMS_printParameterStatus(printAllAttributes_Out_Of_Range,printValues.print_Param_Out_Of_Range);
 	
 	BMS_checkAttribute_Threshold_And_Trigger_Warning(temperature,BMS_ATTRIBUTE_TEMPERATURE_LOWER_THRESHOLD_WARN_VALUE,BMS_ATTRIBUTE_TEMPERATURE_UPPER_THRESHOLD_WARN_VALUE,printValues.print_Param_Temp);
 	BMS_checkAttribute_Threshold_And_Trigger_Warning(soc,BMS_ATTRIBUTE_SOC_LOWER_THRESHOLD_WARN_VALUE,BMS_ATTRIBUTE_SOC_UPPER_THRESHOLD_WARN_VALUE,printValues.print_Param_SoC);
 	BMS_checkAttribute_Threshold_And_Trigger_Warning(chargeRate,BMS_ATTRIBUTE_CHARGE_RATE_LOWER_THRESHOLD_WARN_VALUE,BMS_ATTRIBUTE_CHARGE_RATE_UPPER_THRESHOLD_WARN_VALUE,printValues.print_Param_ChargeRate);
 	
+	BMS_printParameterStatus(printAllAttributes_In_Lower_Threshold,printValues.print_Param_Lower_Threshold);
+	BMS_printParameterStatus(printAllAttributes_In_Upper_Threshold,printValues.print_Param_Upper_Threshold);
+	
 	printf("Test Case: %d End\n\n",testCase);
 	testCase = testCase + 1;
-	strcpy(printAllAttributes_In_Risk,"");
+	strcpy(printAllAttributes_Out_Of_Range,"");
 	
 	if( TRUE == BMS_parameters_attributes.bms_Status_b) 
 	{
