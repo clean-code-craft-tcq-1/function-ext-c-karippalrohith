@@ -60,9 +60,9 @@ static print_Params_s print_Params_German = {
 };
 
 static print_Params_s printValues;
-static char printAllAttributes_Out_Of_Range[60] = "No attribute";
-static char printAllAttributes_In_Lower_Threshold[60] = "No attribute";
-static char printAllAttributes_In_Upper_Threshold[60] = "No attribute";
+static char printAllAttributes_Out_Of_Range[60] = " ";
+static char printAllAttributes_In_Lower_Threshold[60] = " ";
+static char printAllAttributes_In_Upper_Threshold[60] = " ";
 static int testCase;
 /*=============================================================================
  =======                              METHODS                            =======
@@ -109,7 +109,7 @@ bool BMS_checkAttribute_OutOfRange(float bms_attribute, float attribute_Min_Valu
  *//*------------------------------------------------------------------------*/
 void BMS_printParameterStatus(char attribute[],char attribute_Status[])
 {
-	int strCmpResult = strcmp(attribute,"No attribute");
+	int strCmpResult = strcmp(attribute," ");
 	if(strCmpResult != 0)	
 	{
 		printf("%s %s\n",attribute,attribute_Status);
