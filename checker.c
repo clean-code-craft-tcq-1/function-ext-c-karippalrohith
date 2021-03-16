@@ -60,7 +60,7 @@ static print_Params_s print_Params_German = {
 };
 
 static print_Params_s printValues;
-static char printAllAttributes_In_Risk[60] = "Attribute";
+static char printAllAttributes_In_Risk[60] = "No Attribute ";
 static int testCase;
 /*=============================================================================
  =======                              METHODS                            =======
@@ -87,6 +87,7 @@ bool BMS_checkAttribute_OutOfRange(float bms_attribute, float attribute_Min_Valu
 	{
 		//BMS_printParameterStatus(print_Params,printValues.print_Param_Out_Of_Range);
 		strcat(printAllAttributes_In_Risk,print_Params);
+		strcat(printAllAttributes_In_Risk,", ");
 		retAtributeStatus = TRUE;
 		BMS_setBMSStatus(TRUE);									
 	}	
