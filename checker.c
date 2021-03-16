@@ -60,7 +60,7 @@ static print_Params_s print_Params_German = {
 };
 
 static print_Params_s printValues;
-printAllAttributes_In_Upper_Thresholdstatic char printAllAttributes_Out_Of_Range[60] = " ";
+char printAllAttributes_Out_Of_Range[60] = " ";
 static char printAllAttributes_In_Lower_Threshold[60] = " ";
 static char printAllAttributes_In_Upper_Threshold[60] = " ";
 static int testCase;
