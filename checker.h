@@ -32,21 +32,41 @@
 #define BMS_ATTRIBUTE_CHARGE_RATE_UPPER_THRESHOLD_WARN_VALUE    	0.76
 #define BMS_ATTRIBUTE_CHARGE_RATE_MAX_VALUE            				0.80
 
+char print_Parameters_English[] = {"Temperature","State of Charge","Charge Rate","out of range!","reaching Lower Threshold","reaching Higher Threshold"};
+char print_Parameters_German[] = {"Temperieren","Stand der Abgabe","Gebührensatz","Außer Reichweite!","Erreichen der unteren Schwelle","Erreichen einer höheren Schwelle"};
+
+typedef enum{
+	PRINT_VALUE_TEMPERATURE,
+	PRINT_VALUE_STATE_OF_CHARGE,
+	PRINT_VALUE_CHARGE_RATE,
+	PRINT_VALUE_OUT_OF_RANGE,
+	PRINT_VALUE_LOWER_THRESHOLD,
+	PRINT_VALUE_UPPER_THRESHOLD,
+	PRINT_VALUE_MAX
+}print_Values_t;
+
 typedef enum {	FALSE, 
 				TRUE
 }bool;
+
+typedef enum {
+		LANGUAGE_ENGLISH,
+		LANGUAGE_GERMAN,
+		LANGUAGE_MAX
+}language_t;
 
 typedef struct {
     bool temp_Status_b;
     bool soc_Status_b;
     bool chargeRate_Status_b;
     bool bms_Status_b;
+	language_t language_e;
 } BMS_parameters_s;
 
 void BMS_setBMSStatus(bool bms_Status);
 void BMS_printParameterStatus(char attribute[],char attribute_Status[]);
-bool BMS_checkAttribute_OutOfRange(float bms_attribute, float attribute_Min_Value, float attribute_Max_Value, char param[]);
-void BMS_checkAttribute_Threshold_And_Trigger_Warning(float bms_attribute, float attribute_Warn_Lower_Threshold, float attribute_Warn_Upper_Threshold, char param[]);
-int BMS_batteryIsOk(float temperature, float soc, float chargeRate);
+bool BMS_checkAttribute_OutOfRange(float bms_attribute, float attribute_Min_Value, float attribute_Max_Value, print_Values_t print_Value);
+void BMS_checkAttribute_Threshold_And_Trigger_Warning(float bms_attribute, float attribute_Warn_Lower_Threshold, float attribute_Warn_Upper_Threshold, print_Values_t print_Value);
+int BMS_batteryIsOk(float temperature, float soc, float chargeRate,language_t language);
 
 #endif /*BMS_MAIN_H_*/
