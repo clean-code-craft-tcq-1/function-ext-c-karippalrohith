@@ -109,7 +109,10 @@ bool BMS_checkAttribute_OutOfRange(float bms_attribute, float attribute_Min_Valu
  *//*------------------------------------------------------------------------*/
 void BMS_printParameterStatus(char attribute[],char attribute_Status[])
 {
-	printf("%s %s\n",attribute,attribute_Status);
+	if(attribute != NULL)
+	{
+		printf("%s %s\n",attribute,attribute_Status);
+	}
 }
 
 /*---------------------------------------------------------------------------*/
