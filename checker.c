@@ -131,7 +131,7 @@ void BMS_checkAttribute_Threshold_And_Trigger_Warning(float bms_attribute, float
 	if(bms_attribute > attribute_Warn_Upper_Threshold) 
 	{
 		//Trigger warning for Higher Threshold
-		BMS_printParameterStatus(print_Params[],printValues.print_Param_Upper_Threshold);
+		BMS_printParameterStatus(print_Params,printValues.print_Param_Upper_Threshold);
 	}
 }
 
