@@ -51,16 +51,13 @@ typedef struct {
 } BMS_parameters_s;
 
 typedef struct {
-	char print_Param_Temp[],
-	char print_Param_SoC[],
-	char print_Param_ChargeRate[],
-	char print_Param_Out_Of_Range[],
-	char print_Param_Lower_Threshold[],
-	char print_Param_Upper_Threshold[],
+	char print_Param_Temp[];
+	char print_Param_SoC[];
+	char print_Param_ChargeRate[];
+	char print_Param_Out_Of_Range[];
+	char print_Param_Lower_Threshold[];
+	char print_Param_Upper_Threshold[];
 }print_Params_s;
-
-char print_Parameters_English[PRINT_VALUE_MAX][] = {'Temperature','State of Charge','Charge Rate','out of range!','reaching Lower Threshold','reaching Higher Threshold'};
-char print_Parameters_German[PRINT_VALUE_MAX][] = {'Temperieren','Stand der Abgabe','Gebührensatz','Außer Reichweite!','Erreichen der unteren Schwelle','Erreichen einer höheren Schwelle'};
 
 void BMS_setBMSStatus(bool bms_Status);
 void BMS_printParameterStatus(char attribute[],char attribute_Status[]);
