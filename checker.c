@@ -17,7 +17,7 @@
  /*------ standard includes -------*/
 #include <stdio.h>
 #include <assert.h>
-
+#include <string.h>
 /*------ module includes --------*/
 #include "checker.h"
 
