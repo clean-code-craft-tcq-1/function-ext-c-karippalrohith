@@ -172,7 +172,7 @@ int BMS_batteryIsOk(float temperature, float soc, float chargeRate,language_t la
 	
 	printf("Test Case: %d End\n\n",testCase);
 	testCase = testCase + 1;
-	printAllAttributes_In_Risk[60] = " ";
+	strcpy(printAllAttributes_In_Risk,"");
 	
 	if( TRUE == BMS_parameters_attributes.bms_Status_b) 
 	{
