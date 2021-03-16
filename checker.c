@@ -155,7 +155,7 @@ void BMS_checkAttribute_Threshold_And_Trigger_Warning(float bms_attribute, float
 int BMS_batteryIsOk(float temperature, float soc, float chargeRate,language_t language) {
 	
 	printf("Test Case: %d Start\n",testCase);
-	testCase = testCase + 1;
+	
 	BMS_parameters_attributes.language_e = language;
 	
 	printValues = (BMS_parameters_attributes.language_e == LANGUAGE_ENGLISH)?print_Params_English:print_Params_German;
@@ -171,6 +171,8 @@ int BMS_batteryIsOk(float temperature, float soc, float chargeRate,language_t la
 	BMS_checkAttribute_Threshold_And_Trigger_Warning(chargeRate,BMS_ATTRIBUTE_CHARGE_RATE_LOWER_THRESHOLD_WARN_VALUE,BMS_ATTRIBUTE_CHARGE_RATE_UPPER_THRESHOLD_WARN_VALUE,printValues.print_Param_ChargeRate);
 	
 	printf("Test Case: %d End\n\n",testCase);
+	testCase = testCase + 1;
+	printAllAttributes_In_Risk[60] = " ";
 	
 	if( TRUE == BMS_parameters_attributes.bms_Status_b) 
 	{
