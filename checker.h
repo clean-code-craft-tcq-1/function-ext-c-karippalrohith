@@ -32,8 +32,8 @@
 #define BMS_ATTRIBUTE_CHARGE_RATE_UPPER_THRESHOLD_WARN_VALUE    	0.76
 #define BMS_ATTRIBUTE_CHARGE_RATE_MAX_VALUE            				0.80
 
-char print_Parameters_English[] = {"Temperature","State of Charge","Charge Rate","out of range!","reaching Lower Threshold","reaching Higher Threshold"};
-char print_Parameters_German[] = {"Temperieren","Stand der Abgabe","Gebührensatz","Außer Reichweite!","Erreichen der unteren Schwelle","Erreichen einer höheren Schwelle"};
+char print_Parameters_English[PRINT_VALUE_MAX] = {"Temperature","State of Charge","Charge Rate","out of range!","reaching Lower Threshold","reaching Higher Threshold"};
+char print_Parameters_German[PRINT_VALUE_MAX] = {"Temperieren","Stand der Abgabe","Gebührensatz","Außer Reichweite!","Erreichen der unteren Schwelle","Erreichen einer höheren Schwelle"};
 
 typedef enum{
 	PRINT_VALUE_TEMPERATURE,
