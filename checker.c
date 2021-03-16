@@ -82,7 +82,7 @@ bool BMS_checkAttribute_OutOfRange(float bms_attribute, float attribute_Min_Valu
 		
 	if(bms_attribute < attribute_Min_Value || bms_attribute > attribute_Max_Value) 
 	{
-		BMS_printParameterStatus(print_Params[],printValues.print_Param_Out_Of_Range[]);
+		BMS_printParameterStatus(print_Params,printValues.print_Param_Out_Of_Range[]);
 		retAtributeStatus = TRUE;
 		BMS_setBMSStatus(TRUE);									
 	}	
@@ -125,7 +125,7 @@ void BMS_checkAttribute_Threshold_And_Trigger_Warning(float bms_attribute, float
 	if(bms_attribute < attribute_Warn_Lower_Threshold) 
 	{
 		//Trigger warning for Lower Threshold
-		BMS_printParameterStatus(print_Params[],printValues.print_Param_Lower_Threshold);
+		BMS_printParameterStatus(print_Params,printValues.print_Param_Lower_Threshold);
 	}
 	
 	if(bms_attribute > attribute_Warn_Upper_Threshold) 
@@ -153,13 +153,13 @@ int BMS_batteryIsOk(float temperature, float soc, float chargeRate,language_t la
 	
 	printValues = (BMS_parameters_attributes.language_e == LANGUAGE_ENGLISH)?print_Params_English:print_Params_German;
 	
-	BMS_parameters_attributes.temp_Status_b = BMS_checkAttribute_OutOfRange(temperature,BMS_ATTRIBUTE_TEMPERATURE_MIN_VALUE,BMS_ATTRIBUTE_TEMPERATURE_MAX_VALUE,printValues.print_Param_Temp[]);
-	BMS_parameters_attributes.soc_Status_b = BMS_checkAttribute_OutOfRange(soc,BMS_ATTRIBUTE_SOC_MIN_VALUE,BMS_ATTRIBUTE_SOC_MAX_VALUE,printValues.print_Param_SoC[]);
-	BMS_parameters_attributes.chargeRate_Status_b = BMS_checkAttribute_OutOfRange(chargeRate,BMS_ATTRIBUTE_CHARGE_RATE_MIN_VALUE,BMS_ATTRIBUTE_CHARGE_RATE_MAX_VALUE,printValues.print_Param_ChargeRate[]);
+	BMS_parameters_attributes.temp_Status_b = BMS_checkAttribute_OutOfRange(temperature,BMS_ATTRIBUTE_TEMPERATURE_MIN_VALUE,BMS_ATTRIBUTE_TEMPERATURE_MAX_VALUE,printValues.print_Param_Temp);
+	BMS_parameters_attributes.soc_Status_b = BMS_checkAttribute_OutOfRange(soc,BMS_ATTRIBUTE_SOC_MIN_VALUE,BMS_ATTRIBUTE_SOC_MAX_VALUE,printValues.print_Param_SoC);
+	BMS_parameters_attributes.chargeRate_Status_b = BMS_checkAttribute_OutOfRange(chargeRate,BMS_ATTRIBUTE_CHARGE_RATE_MIN_VALUE,BMS_ATTRIBUTE_CHARGE_RATE_MAX_VALUE,printValues.print_Param_ChargeRate);
 	
-	BMS_checkAttribute_Threshold_And_Trigger_Warning(temperature,BMS_ATTRIBUTE_TEMPERATURE_LOWER_THRESHOLD_WARN_VALUE,BMS_ATTRIBUTE_TEMPERATURE_UPPER_THRESHOLD_WARN_VALUE,printValues.print_Param_Temp[]);
-	BMS_checkAttribute_Threshold_And_Trigger_Warning(soc,BMS_ATTRIBUTE_SOC_LOWER_THRESHOLD_WARN_VALUE,BMS_ATTRIBUTE_SOC_UPPER_THRESHOLD_WARN_VALUE,printValues.print_Param_SoC[]);
-	BMS_checkAttribute_Threshold_And_Trigger_Warning(chargeRate,BMS_ATTRIBUTE_CHARGE_RATE_LOWER_THRESHOLD_WARN_VALUE,BMS_ATTRIBUTE_CHARGE_RATE_UPPER_THRESHOLD_WARN_VALUE,printValues.print_Param_ChargeRate[]);
+	BMS_checkAttribute_Threshold_And_Trigger_Warning(temperature,BMS_ATTRIBUTE_TEMPERATURE_LOWER_THRESHOLD_WARN_VALUE,BMS_ATTRIBUTE_TEMPERATURE_UPPER_THRESHOLD_WARN_VALUE,printValues.print_Param_Temp);
+	BMS_checkAttribute_Threshold_And_Trigger_Warning(soc,BMS_ATTRIBUTE_SOC_LOWER_THRESHOLD_WARN_VALUE,BMS_ATTRIBUTE_SOC_UPPER_THRESHOLD_WARN_VALUE,printValues.print_Param_SoC);
+	BMS_checkAttribute_Threshold_And_Trigger_Warning(chargeRate,BMS_ATTRIBUTE_CHARGE_RATE_LOWER_THRESHOLD_WARN_VALUE,BMS_ATTRIBUTE_CHARGE_RATE_UPPER_THRESHOLD_WARN_VALUE,printValues.print_Param_ChargeRate);
 	
 	if( TRUE == BMS_parameters_attributes.bms_Status_b) 
 	{
